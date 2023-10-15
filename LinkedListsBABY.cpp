@@ -11,35 +11,71 @@ struct node {
 };
 
 class linkedList {
-    int initval;
-    node* head = new node{initval,NULL};
 public:
+    node* head = new node;
     linkedList(int i) {
-        initval = i;
+        head->data = i;
+        head->next = NULL;
+        cout << "head created with val " << head->data << " at " << head << endl;
     }
 
     void addNode(int val) {
         node* newNode = new node{val};
-        newNode->next = newNode;
-        cout << "ADDING " << newNode->data << " " << newNode->next << endl;
+        node*& headRef = head;
+
+        cout << "NEWNODE CREATED at " << newNode << endl;
+
+        newNode->next = headRef;
+
+        cout << "ADDING " << newNode->data << " at " << newNode << " linked to " << newNode->next->data << " at " << newNode->next << endl;
+        headRef = newNode;
+
+        cout << "ADDED " << head->data << " at " << head << " linked to " << head->next->data << " at " << head->next << endl;
+
     }
     node* getHead() {
         return head;
     }
 };
 
+void printLinkedList(linkedList list) {
+    node* tempnd = list.head;
+    while (tempnd != NULL) {
+        cout << "READING " << tempnd->data << " at " << tempnd << endl;
+        tempnd = tempnd->next;
+    }
+}
+
+linkedList arr_to_LL(int arr[]) {
+    int size = sizeof(arr);
+    cout << size << endl;
+
+    linkedList templst(arr[0]);
+
+    for (int i = 1; i < size; i++) {
+        templst.addNode(arr[i]);
+    }
+
+    return templst;
+}
+
 int main()
 {
-    node* init = new node{10};
-    linkedList templst(11);
 
-    templst.addNode(30);
-    templst.addNode(20);
-    templst.addNode(10);
 
-    node* tempnd = templst.getHead();
+    int arr[10];
+    int seed = time(NULL);
+    srand(seed);
+
+    for (int i = 0; i < size(arr); i++) {
+        arr[i] = rand();
+    }
+    cout << "rand done size : " << size(arr) << endl;
+    linkedList templst = arr_to_LL(arr);
+
+    node* tempnd = templst.head;
     while (tempnd != NULL) {
-        cout << "READING " << templst.getHead()->data << " " << &*templst.getHead() << endl;
+        cout << "READING " << tempnd->data << " at " << tempnd << endl;
         tempnd = tempnd->next;
     }
 }

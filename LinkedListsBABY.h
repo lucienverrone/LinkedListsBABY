@@ -1,5 +1,4 @@
 #pragma once
 struct node;
-struct linkedList;
+class linkedList;
 
-void addNode(linkedList list, int val);
