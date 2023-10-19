@@ -100,7 +100,8 @@ int main(){
     linkedList l1, l2;
     
     srand(time(0));
-    for (int i = 0; i < 100000000; i++){
+    int count = 100000000;
+    for (int i = 0; i < count; i++){
         l1.insert(rand());
         l2.insert(rand());
     }
@@ -111,6 +112,9 @@ int main(){
     auto d1 = duration_cast<milliseconds>(e1 - s1); //FIND CLOCK DIFF.
 
     //l1.display();
+    cout << endl << endl;
+    cout << "LIST SIZES: " << count << endl;
     cout << "TIME: " << d1.count() << "ms" << endl;
+    cout << endl << endl;
     return 0;
 }
