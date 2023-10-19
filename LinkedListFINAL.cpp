@@ -1,5 +1,9 @@
 #include <iostream>
+#include <time.h>
+#include <chrono>
+
 using namespace std;
+using namespace std::chrono;
 
 struct Node{
     int data;
@@ -94,22 +98,19 @@ class linkedList{
 
 int main(){
     linkedList l1, l2;
+    
+    srand(time(0));
+    for (int i = 0; i < 100000000; i++){
+        l1.insert(rand());
+        l2.insert(rand());
+    }
 
-    l1.insert(13);
-    l1.insert(18);
-    l1.insert(10);
-    l1.insert(1);
-
-    l2.insert(834);
-    l2.insert(23456);
-    l2.insert(3);
-    l2.insert(9876);
-
-    l1.erase(10);
-    l2.erase(3);
-
+    auto s1 = high_resolution_clock::now(); //START CLOCK
     l1.merge(l2);
+    auto e1 = high_resolution_clock::now(); //END CLOCK
+    auto d1 = duration_cast<milliseconds>(e1 - s1); //FIND CLOCK DIFF.
 
-    l1.display();
+    //l1.display();
+    cout << "TIME: " << d1.count() << "ms" << endl;
     return 0;
 }
